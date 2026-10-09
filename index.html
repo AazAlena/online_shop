@@ -39,19 +39,29 @@
 
   <main>
     <section class="hero">
-      <h1>Учебный интернет-магазин</h1>
-      <p>
-        Это стартовая страница учебного frontend-проекта.
-        В дальнейшем на её основе будет разработан многостраничный сайт
-        интернет-магазина или каталога услуг.
-      </p>
-      <a class="button" href="#popular">Перейти к товарам</a>
+      <div class="hero__content">
+        <p class="hero__eyebrow">Учебный проект · 2026</p>
+        <h1 class="hero__title">Учебный интернет-магазин</h1>
+        <p class="hero__lead">
+          Стартовая страница многостраничного сайта. В дальнейшем на её основе
+          будет разработан полноценный каталог товаров и услуг.
+        </p>
+        <div class="hero__actions">
+          <a class="button button--primary" href="#popular">Перейти к товарам</a>
+          <a class="button button--secondary" href="catalog.html">Открыть каталог</a>
+        </div>
+      </div>
+
+      <div class="hero__visual" aria-hidden="true">
+        <span class="hero__blob hero__blob--one"></span>
+        <span class="hero__blob hero__blob--two"></span>
+      </div>
     </section>
 
     <section class="section" id="advantages">
       <h2>Преимущества проекта</h2>
 
-      <ul class="advantages-list">
+      <ul>
         <li>понятная HTML-структура;</li>
         <li>семантические блоки страницы;</li>
         <li>подключение внешнего CSS-файла;</li>
@@ -64,27 +74,58 @@
 
       <div class="products-grid">
         <article class="product-card product-card--featured">
+          <span class="product-card__badge">Хит</span>
+
+          <p class="product-card__category">Категория · Категория</p>
+
           <h3 class="product-card__title">Товар 1</h3>
           <p class="product-card__description">Краткое описание учебного товара.</p>
-          <p class="product-card__price">Цена: 1000 руб.</p>
+
+
+
+          <p class="product-card__price">
+            1000 ₽
+          </p>
+
           <button class="button product-card__button" type="button" data-product="Товар 1">
             Заказать
           </button>
         </article>
 
-        <article class="product-card product-card--featured">
+        <article class="product-card product-card--discount">
+          <span class="product-card__badge">−20%</span>
+
+          <p class="product-card__category">Категория · Категория</p>
+
           <h3 class="product-card__title">Товар 2</h3>
           <p class="product-card__description">Краткое описание учебного товара.</p>
-          <p class="product-card__price">Цена: 1300 руб.</p>
+
+
+
+          <p class="product-card__price">
+            <span class="product-card__price-old">1300 ₽</span>
+            1040 ₽
+          </p>
+
           <button class="button product-card__button" type="button" data-product="Товар 2">
             Заказать
           </button>
         </article>
 
-        <article class="product-card product-card--featured">
+        <article class="product-card product-card--new">
+          <span class="product-card__badge">Новинка</span>
+
+          <p class="product-card__category">Категория · Категория</p>
+
           <h3 class="product-card__title">Товар 3</h3>
           <p class="product-card__description">Краткое описание учебного товара.</p>
-          <p class="product-card__price">Цена: 2000 руб.</p>
+
+
+
+          <p class="product-card__price">
+            2000 ₽
+          </p>
+
           <button class="button product-card__button" type="button" data-product="Товар 3">
             Заказать
           </button>
@@ -141,6 +182,10 @@
   <dialog class="order-dialog" id="order-dialog" aria-labelledby="order-dialog-title">
     <h2 class="order-dialog__title" id="order-dialog-title">Оформление заявки</h2>
 
+    <p class="order-dialog__product">
+      Вы заказываете: <strong id="order-product-name">—</strong>
+    </p>
+
     <form class="order-form" id="order-form" action="#" method="post" novalidate>
       <input type="hidden" id="selected-product" name="product">
 
@@ -165,8 +210,8 @@
     </form>
   </dialog>
 
-  <p class="success-message" id="success-message" hidden>
-    Форма успешно отправлена!
+  <p class="success-message" id="success-message" role="status" hidden>
+    Спасибо! Заявка отправлена. Мы свяжемся с вами в ближайшее время.
   </p>
 </body>
 

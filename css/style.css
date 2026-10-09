@@ -3,31 +3,46 @@
    =============================== */
 
 :root {
-  /* Основные цвета проекта */
-  --color-bg: #ffffff;
-  --color-text: #222222;
-  --color-muted: #666666;
-  --color-primary: #0057b8;
-  --color-primary-dark: #003f86;
-  --color-border: #dddddd;
-  --color-surface: #f7f7f7;
-  --color-surface-accent: #eef5ff;
-  --color-danger: #b00020;
-  --color-success: #168a2f;
-  --color-success-bg: #eefaf0;
+  /* --- Собственная визуальная концепция: тёплая терракотовая палитра --- */
+
+  /* Фоны и текст */
+  --color-bg: #fffaf5;
+  /* тёплый кремовый вместо белого */
+  --color-text: #2b2118;
+  /* тёмно-коричневый вместо чёрного */
+  --color-muted: #7a6a5d;
+  /* приглушённый коричневый */
+  --color-surface: #f6ede4;
+  /* бежевая поверхность */
+  --color-surface-accent: #fbe4d5;
+  /* персиковый акцент */
+
+  /* Основной акцент — терракота */
+  --color-primary: #c2410c;
+  --color-primary-dark: #9a3412;
+
+  /* Границы и статусы */
+  --color-border: #e6d8c9;
+  --color-danger: #b91c1c;
+  --color-success: #15803d;
+  --color-success-bg: #ecfdf3;
   --color-white: #ffffff;
 
-  /* Отступы */
+  /* Отступы — без изменений */
   --space-xs: 4px;
   --space-sm: 8px;
   --space-md: 16px;
   --space-lg: 24px;
   --space-xl: 32px;
 
-  /* Скругления */
-  --radius-sm: 6px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
+  /* Скругления — чуть крупнее для мягкости */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+
+  /* Новая переменная: тень (используется в нескольких местах) */
+  --shadow-sm: 0 2px 6px rgba(43, 33, 24, 0.06);
+  --shadow-md: 0 6px 20px rgba(43, 33, 24, 0.10);
 
   /* Размеры */
   --container-width: 1100px;
@@ -57,8 +72,8 @@
 */
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  line-height: 1.5;
+  font-family: "Georgia", "Times New Roman", serif;
+  line-height: 1.6;
   color: var(--color-text);
   background-color: var(--color-bg);
 }
@@ -77,20 +92,59 @@ footer {
   Оформляем шапку страницы.
 */
 .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
   background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(6px);
 }
 
 .site-header__inner {
   max-width: var(--container-width);
   margin: 0 auto;
-  padding: var(--space-lg);
+  padding: var(--space-md) var(--space-lg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
 }
 
+/* Логотип с квадратной «маркой» */
 .site-header__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
   font-weight: 700;
+  font-size: 20px;
   color: var(--color-text);
   text-decoration: none;
 }
+/*
+.site-header__logo-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  font-family: Georgia, serif;
+  font-size: 20px;
+  color: var(--color-white);
+  background-color: var(--color-primary);
+  border-radius: var(--radius-sm);
+}*/
+
+/* Акцентная ссылка в меню — как «кнопка» */
+/*.site-nav__link--accent {
+  color: var(--color-white);
+  background-color: var(--color-primary);
+}
+
+.site-nav__link--accent:hover {
+  background-color: var(--color-primary-dark);
+  color: var(--color-white);
+}*/
 
 /*
   Оформляем подвал страницы тем же фоном,
@@ -122,6 +176,27 @@ a:focus-visible {
 }
 
 /*
+  у заголовков h2 разделов появляется
+  короткая акцентная черта слева
+*/
+
+.section h2 {
+  position: relative;
+  padding-left: var(--space-md);
+}
+
+.section h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.25em;
+  bottom: 0.25em;
+  width: 4px;
+  background-color: var(--color-primary);
+  border-radius: 2px;
+}
+
+/*
   Пока это обычная ссылка или кнопка, но визуально она оформляется как кнопка.
 */
 .button {
@@ -129,9 +204,18 @@ a:focus-visible {
   padding: var(--space-sm) var(--space-md);
   border: none;
   border-radius: var(--radius-sm);
-  font: inherit;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+
+  /*font: inherit;*/
+
   text-decoration: none;
   cursor: pointer;
+}
+
+.button:active {
+  transform: translateY(1px);
 }
 
 .button--primary {
@@ -142,6 +226,7 @@ a:focus-visible {
 .button--primary:hover {
   background-color: var(--color-primary-dark);
 }
+
 .button--secondary {
   color: var(--color-primary);
   background-color: transparent;
@@ -210,12 +295,86 @@ a:focus-visible {
   Hero-блок — первый крупный блок страницы.
   Он визуально отделяется от остальных разделов фоном и отступами.
 */
+
 .hero {
   max-width: var(--container-width);
   margin: 0 auto var(--space-xl);
-  padding: var(--space-xl) var(--space-lg);
+  padding: var(--space-xl);
+  display: flex;
+
+  gap: var(--space-xl);
+  align-items: center;
   background-color: var(--color-surface-accent);
   border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__content {
+  flex: 1.2 1 0;   /* растёт пропорционально 1.2 */
+  min-width: 0;
+}
+
+.hero__visual {
+  flex: 0.8 1 0;   
+  position: relative;
+  min-height: 220px;
+}
+
+.hero__eyebrow {
+  margin: 0 0 var(--space-sm);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.hero__title {
+  margin: 0 0 var(--space-md);
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 1.15;
+  color: var(--color-text);
+}
+
+.hero__lead {
+  margin: 0 0 var(--space-lg);
+  max-width: 46ch;
+  color: var(--color-muted);
+  font-size: 17px;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+/* Пантовые кружечки */
+
+
+.hero__blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(6px);
+  opacity: 0.55;
+}
+
+.hero__blob--one {
+  width: 220px;
+  height: 220px;
+  right: 20px;
+  top: 0;
+  background: radial-gradient(circle at 30% 30%, #f59e0b, #c2410c 70%);
+}
+
+.hero__blob--two {
+  width: 140px;
+  height: 140px;
+  right: 140px;
+  bottom: -10px;
+  background: radial-gradient(circle at 30% 30%, #fde68a, #f59e0b 70%);
 }
 
 /*
@@ -226,38 +385,31 @@ a:focus-visible {
   margin: 0 auto var(--space-xl);
 }
 
-/*
-  Убираем лишний верхний отступ у заголовков разделов.
-*/
-.section h2 {
-  margin-top: 0;
-}
 
 /*
-  Карточка товара — самостоятельный блок.
-  На следующих занятиях карточки будут доработаны и выстроены в сетку.
-*/
+  Карточка товара — самостоятельный блок.*/
+
 .product-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
-  margin-bottom: 0;
   padding: var(--space-md);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   background-color: var(--color-bg);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
 }
 
-.product-card .button {
-  margin-top: auto;
-  align-self: flex-start;
-}
 
 /*
   При наведении подсвечиваем рамку — карточка воспринимается как интерактивный блок.
 */
 .product-card:hover {
   border-color: var(--color-primary);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
 }
 
 .product-card--featured {
@@ -266,6 +418,10 @@ a:focus-visible {
 
 .product-card--discount {
   border-color: var(--color-danger);
+}
+
+.product-card--new {
+  border-color: var(--color-success);
 }
 
 .product-card__title {
@@ -283,14 +439,51 @@ a:focus-visible {
   font-weight: 700;
 }
 
-.product-card--discount .product-card__price {
-  color: var(--color-danger);
-}
 
 .product-card__button {
   margin-top: auto;
   align-self: flex-start;
 }
+
+
+/*.product-card--discount .product-card__price {
+  color: var(--color-danger);
+}*/
+
+/* --- Бейдж --- */
+
+.product-card__badge {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-white);
+  background-color: var(--color-primary);
+  border-radius: 999px;
+  z-index: 1;
+}
+
+.product-card--discount .product-card__badge {
+  background-color: var(--color-danger);
+}
+
+.product-card--new .product-card__badge {
+  background-color: var(--color-success);
+}
+
+.product-card__category {
+  margin: 0;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-muted);
+}
+
+
 /*
   Дополнительный информационный блок.
 */
@@ -311,6 +504,34 @@ a:focus-visible {
 /* ===============================
    5. Форма и модальное окно
    =============================== */
+
+/* Строка «Вы заказываете» в модалке */
+.order-dialog__product {
+  margin: 0 0 var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--color-surface-accent);
+  border-left: 4px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  color: var(--color-muted);
+  font-size: 14px;
+}
+
+.order-dialog__product strong {
+  color: var(--color-text);
+}
+
+/* Сообщение об успехе — «тост» */
+.success-message {
+  max-width: var(--container-width);
+  margin: var(--space-lg) auto;
+  padding: var(--space-md) var(--space-lg);
+  border-left: 4px solid var(--color-success);
+  background-color: var(--color-success-bg);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  color: var(--color-success);
+  font-weight: 600;
+}
 
 /*
   Модальное окно.
@@ -335,21 +556,17 @@ a:focus-visible {
   Поле формы.
   Каждый блок получает нижний отступ.
 */
-.form-field {
-  margin-bottom: var(--space-md);
-}
+
 
 /*
   Подпись поля.
 */
+/*
 .form-field label {
   display: block;
   margin-bottom: var(--space-xs);
 }
 
-/*
-  Основные поля формы.
-*/
 .form-field input,
 .form-field select,
 .form-field textarea {
@@ -358,7 +575,7 @@ a:focus-visible {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   font: inherit;
-}
+}*/
 
 /*
   Checkbox не должен занимать всю ширину.
@@ -413,22 +630,13 @@ a:focus-visible {
 /*
   Кнопки формы.
 */
-.form-actions {
+/*.form-actions {
   display: flex;
   gap: 12px;
   margin-top: var(--space-lg);
-}
+}*/
 
-/*
-  Сообщение об успешной отправке.
-*/
-.success-message {
-  max-width: var(--container-width);
-  margin: var(--space-lg) auto;
-  padding: var(--space-md);
-  border-left: 4px solid var(--color-success);
-  background-color: var(--color-success-bg);
-}
+
 
 /*Стили для хлебных крошек*/
 
@@ -448,14 +656,6 @@ a:focus-visible {
   color: var(--color-muted);
 }
 
-.breadcrumbs a {
-  color: var(--color-primary);
-}
-
-.breadcrumbs span::before {
-  content: " / ";
-  color: var(--color-muted);
-}
 
 
 .catalog-layout {
@@ -507,4 +707,3 @@ a:focus-visible {
   border-radius: var(--radius-sm);
   font: inherit;
 }
-
