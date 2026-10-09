@@ -13,9 +13,10 @@ const selectedProductInput = document.getElementById('selected-product');
 // Перебираем все кнопки «Заказать».
 orderButtons.forEach((button) => {
   button.addEventListener('click', () => {
+    
     // Получаем название товара из data-атрибута.
     const productName = button.dataset.product;
-
+    console.log("click" + productName);
     // Записываем название товара в скрытое поле формы.
     selectedProductInput.value = productName;
 
