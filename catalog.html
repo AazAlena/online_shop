@@ -7,6 +7,7 @@
     <meta name="description" content="Каталог товаров учебного интернет-магазина.">
     <title>Каталог товаров — Учебный интернет-магазин</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/main.js" defer></script>
 </head>
 
 <body>
@@ -162,6 +163,39 @@
         <p>&copy; 2026 Учебный проект. Все права защищены.</p>
         <p>Дисциплина: Фронтенд и бэкенд разработка</p>
     </footer>
+
+
+    <dialog class="order-dialog" id="order-dialog" aria-labelledby="order-dialog-title">
+        <h2 class="order-dialog__title" id="order-dialog-title">Оформление заявки</h2>
+
+        <p class="order-dialog__product">
+            Вы заказываете: <strong id="order-product-name">—</strong>
+        </p>
+
+        <form class="order-form" id="order-form" action="#" method="post" novalidate>
+            <input type="hidden" id="selected-product" name="product">
+
+            <div class="order-form__field">
+                <label class="order-form__label" for="order-name">Имя</label>
+                <input class="order-form__input" id="order-name" name="name" type="text" required>
+            </div>
+
+            <div class="order-form__field">
+                <label class="order-form__label" for="order-email">E-mail</label>
+                <input class="order-form__input" id="order-email" name="email" type="email" required>
+            </div>
+
+            <div class="order-form__actions">
+                <button class="button button--secondary" type="button" id="close-order-dialog">
+                    Закрыть
+                </button>
+                <button class="button button--primary" type="submit">
+                    Отправить заявку
+                </button>
+            </div>
+        </form>
+    </dialog>
+
 </body>
 
 </html>
