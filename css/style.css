@@ -34,7 +34,7 @@
   --space-lg: 24px;
   --space-xl: 32px;
 
-  /* Скругления — чуть крупнее для мягкости */
+  /* Скругления  */
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 18px;
@@ -296,22 +296,25 @@ a:focus-visible {
 */
 
 .hero {
-  max-width: var(--container-width);
-  margin: 0 auto var(--space-xl);
+  /*max-width: var(--container-width);
+  margin: 0 auto var(--space-xl);*/
   padding: var(--space-xl);
   display: flex;
-
+    
   gap: var(--space-xl);
   align-items: center;
   background-color: var(--color-surface-accent);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
+  background-image: url("../images/persic.jpg");
+  background-size: cover;
+  background-position: center;
+  /*border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);*/
   position: relative;
   overflow: hidden;
 }
 
 .hero__content {
-  flex: 1.2 1 0;   /* растёт пропорционально 1.2 */
+  flex: 1.2 1 0;  
   min-width: 0;
 }
 
@@ -332,7 +335,7 @@ a:focus-visible {
 
 .hero__title {
   margin: 0 0 var(--space-md);
-  font-size: clamp(28px, 4vw, 44px);
+  
   line-height: 1.15;
   color: var(--color-text);
 }
@@ -456,9 +459,7 @@ a:focus-visible {
   top: var(--space-sm);
   right: var(--space-sm);
   padding: 4px 10px;
-  font-size: 11px;
   
-  text-transform: uppercase;
   color: var(--color-white);
   background-color: var(--color-primary);
   border-radius: 999px;
@@ -475,8 +476,6 @@ a:focus-visible {
 
 .product-card__category {
   margin: 0;
-  font-size: 12px;
-  text-transform: uppercase;
   color: var(--color-muted);
 }
 
@@ -574,9 +573,6 @@ a:focus-visible {
   font: inherit;
 }*/
 
-/*
-  Checkbox не должен занимать всю ширину.
-*/
 
 .order-form__field {
   margin-bottom: var(--space-md);
